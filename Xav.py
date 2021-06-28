@@ -1,31 +1,20 @@
 import discord
-from discord.ext import commands, tasks    
+from discord.ext import commands
 import random
 
+from utils import Guild_utils
 
-bot = commands.Bot(command_prefix='€')
+
 
 GUILD_ID = 711325947269349448
 
-
-@tasks.loop(hours=1)
-async def change_active_color():
-    active_role = bot.get_guild(GUILD_ID).get_role(766278169849364481)
-
-    while True:
-        r, g, b = [random.randint(0, 255) for _ in range(3)]
-
-        if (r, g, b) not in list(map(lambda role: role.color.to_rgb(), bot.get_guild(GUILD_ID).roles)):
-            break
-
-    await active_role.edit(colour=discord.Colour.from_rgb(r, g, b))
+bot = commands.Bot(command_prefix='€')
+guild = Guild_utils(bot, GUILD_ID)
 
 
-@bot.event()
+@bot.event
 async def on_ready():
     print(f"Logged as {bot.user}")
-
-    change_active_color.start()
 
 
 @bot.command()
@@ -46,8 +35,7 @@ async def tos(ctx):
 
 @bot.command()
 async def w(ctx):
-    await ctx.send("Welcome!")
+    await ctx.send(random.choices(['Welcome', 'Welcum'], [0.99, 0.01]))  # 1% chance of saying "Welcum"
 
 
-bot.run('')
-
+bot.run()
