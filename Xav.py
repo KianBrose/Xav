@@ -153,7 +153,7 @@ async def hangman(ctx):
         while playing:
             msg = await bot.wait_for('message', check=checksender)
             if (msg.content) == word:
-                await ctx.send("correct! you won a big nothing congrats!!")
+                await ctx.send("correct! you won!!")
                 playing = False
             elif len(msg.content) == 1:
                 if (msg.content) in word:
@@ -162,7 +162,7 @@ async def hangman(ctx):
                             letter[i] = msg.content
                             await ctx.send(' '.join(letter))
                             if not "-" in letter:
-                                await ctx.send("correct! you won a big nothing congrats!!")
+                                await ctx.send("correct! you won!!")
                 else:
                     if msg in wrongletter:
                         await ctx.send("you tried that before and it is wrong")
