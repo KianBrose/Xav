@@ -8,7 +8,8 @@ from utils import Guild_utils
 
 
 GUILD_ID = 700300301030391828
-
+playing = False
+wordlist = ['properly', 'identity', 'wood', 'tall', 'yellow', 'Marine', 'inner', 'wished', 'sounds', 'wagon', 'publication', 'Jews', 'rural', 'item', 'phone', 'attend', 'decisions', 'unable', 'faced', 'Republican', 'positions', 'huge', 'risk', 'supported', 'symbol', 'machines', 'description', 'seat', 'Smith', 'walking', 'Lake', 'trained', 'suggest', 'create', 'soil', 'interpretation', 'putting', 'forget', 'Dear', 'thoughts', 'preparation', 'Measurements', 'practices', 'experienced', 'Welfare', 'crowd', 'largest', 'Hudson', 'Massachusetts', 'Co', 'pushed', 'payment', 'handle', 'absence', 'prove', 'bitter', 'negative', 'vehicles', 'spend', 'January', 'remarks', 'assigned', 'Administrative', 'driving', 'grass', 'loose', 'wonderful', 'August', 'troops', 'band', 'chest', 'finding', 'slight', 'Japanese', 'windows', 'version', 'breakfast', 'What&#8217;s', 'sin', 'examples', 'experiences', 'depth', 'disease', 'wet', 'breath', 'Motors', 'practically', 'content', 'establishment', 'introduced', 'conflict', 'element', 'detailed', 'eventually', 'theater', 'correct', 'widely', 'hero', 'trust', 'raise', 'developing', 'Los', 'centers', 'Gold', 'dozen', 'telling', 'Alfred', 'bedroom', 'advanced', 'Detective', 'Indian', 'silence', 'contrary', 'characteristics', 'flesh', 'investigation', 'achieve', 'approval', 'estate', 'elections', 'Supreme', 'listen', 'conventional', 'gradually', 'David', 'views', 'foods', 'pull', 'October', 'Arthur', 'stream', 'Warren', 'advice', 'surprise', 'stages', 'player', 'guy', 'agree', 'uniform', 'abroad', 'devoted', 'papers', 'rear', 'cousin', 'situations', 'boats', 'ages', 'begun', 'colors', 'easier', 'shoulders', 'sick', 'nodded', 'opportunities', 'necessarily', 'angle', 'throat', 'waves', 'laughed', 'efficiency', 'automobile', 'mention', 'courts', 'issued', 'expense', 'extremely', 'fill', 'Institute', 'television', 'choose', 'Assembly', 'chain', 'Latin', 'Eisenhower', 'knowing', 'manufacturers', 'proud', 'wooden', 'worse', 'advertising', 'extra', 'Philadelphia', 'Angeles', 'pair', 'brilliant', 'conversation', 'taught', 'welcome', 'Hills', 'conviction', 'female', 'strike', 'burning', 'engine', 'Moments', 'Fundamental', 'tiny', 'desired', 'convinced', 'noticed', 'Till', 'towns', 'childhood', 'Protestant', 'employed', 'speaker', 'Constitution', 'passage', 'millions', 'Roberts', 'request', 'firmly', 'count', 'tendency', 'acceptance', 'driver', 'depends', 'ride', 'impressive', 'Sports', 'milk', 'Holy', 'tragedy', 'incident', 'operator', 'payments', 'creative', 'silent', 'measures', 'consideration', 'leaves', 'partly', 'Grand', 'suit', 'destroy', 'hoped', 'hopes', 'Royal', 'limit', 'operate', 'Twelve', 'Guard', 'integration', 'tired', 'screen', 'Mantle', 'Charlie', 'shooting', 'quietly', 'She&#8217;s', 'cry', 'via', 'pink', 'missile', 'functions', 'formal', 'occasionally', 'comparison', 'resistance', 'personality', 'concrete', 'precisely', 'plain', 'swung', 'sorry', 'maintained', 'drinking', 'intelligence', 'anger', 'poem', 'attitudes', 'liquid', 'Hearst', 'considering', 'bonds', 'denied', 'bills', 'employment', 'Cook', 'grant', 'fears', 'Cuba', 'sold', 'thousands', 'engaged', 'provision', 'purchase', 'safety', 'honest', 'representative', 'deny', 'Northern', 'Moscow', 'expenses', 'expansion', 'testimony', 'prior', 'blind', 'luck', 'lights', 'remarkable', 'surely', 'humor', 'Opera', 'Italian', 'singing', 'mail', 'Everywhere', 'vacation', 'Models', 'boards', 'supplies', 'stairs', 'ring', 'concentration', 'Congregation', 'rolled', 'unknown', 'movements', 'wearing', 'aspect', 'numerous', 'instrument', 'mere', 'essentially', 'soul', 'periods', 'patterns', 'odd', 'Lincoln', 'skin', 'Superior', 'relative', 'recommended', 'legislation', 'Georgia', 'bond', 'violence', 'insurance', 'opposition', 'creation', 'loan', 'dollar', 'difficulties', 'atomic', 'sheet', 'encourage', 'losses', 'trend', 'weakness', 'wave', 'identified', 'native', 'Avenue', 'decade', 'curious', 'anyway', 'engineering', 'pm', 'threw', 'flight', 'dangerous', 'award', 'ain&#8217;t', 'Wright', 'panels', 'seriously', 'liberty', 'shares', 'conscious', 'Salt', 'author', 'Chamber', 'centuries', 'equivalent', 'electrical', 'fought', 'pocket', 'fiction', 'doctrine', 'precision', 'artery', 'shut', 'offices', 'promised', 'promise', 'residential', 'adopted', 'taxes', 'load', 'depend', 'sum', 'Africa', 'impression', 'feels', 'referred', 'Edward', 'Calling', 'Pennsylvania', 'valuable', 'Alexander', 'Steel', 'charges', 'containing', 'target', 'includes', 'interference', 'TV', 'mounted', 'Cup', 'intended', 'Brain', 'qualities', 'offers', 'February', 'riding', 'Lucy', 'percentage', 'contain', 'Adams', 'expenditures', 'meat', 'Watson', 'elsewhere', 'prime', 'Ballet', 'cast', 'approached', 'angry', 'universal', 'terrible', 'medium', 'diameter', 'discovery', 'ice', 'curve', 'mold', 'burden', 'listed', 'warning', 'considerably', 'mostly', 'amounts', 'admitted', 'errors', 'wisdom', 'opinions', 'Asia', 'continuous', 'seeking', 'origin', 'Acres', 'changing', 'confusion', 'Orleans', 'hundreds', 'developments', 'enjoy', 'fired', 'younger', 'helping', 'pounds', 'nearby', 'accomplished', 'lies', 'suffering', 'em', 'lovely', 'snake', 'fun', 'sale', 'driven', 'spirits', 'ships', 'agent', 'collected', 'extensive', 'path', 'climbed', 'pilot', 'shoes', 'mobile', 'tables', 'expensive', 'Adam', 'arranged', 'volumes', 'answers', 'confused', 'contribute', 'Recognition', 'brush', 'Manchester', 'Hans', 'slaves', 'washing', 'oxygen', 'thickness', 'Mama', 'believes', 'mental', 'liquor', 'republic', 'lawyer', 'year&#8217;s', 'insisted', 'technology', 'bureau', 'route', 'explanation', 'dealing', 'rapid', 'salary', 'saved', 'transportation', 'reader', 'External', 'pace', 'recorded', 'iron', 'suffered', 'flying', 'dirt', 'year-old', 'yard', 'switch', 'concerns', 'separated', 'tour', 'dancing', 'comfort', 'Brothers', 'consists', 'warfare', 'investment', 'coat', 'raw', 'occur', 'reaching', 'grown', 'marketing', 'resulting', 'tend', 'drama', 'heads', 'identification', 'ie', 'lifted', 'catch', 'Mountains', 'recreation', 'heaven', 'readily', 'porch', 'cloth', 'darkness', 'Whenever', 'emotions', 'environment', 'appointed', 'prison', 'obtain', 'urban', 'smooth', 'holds', 'excess', 'waters', 'reply', 'unlike', 'reduction', 'comment', 'replaced', 'nineteenth', 'ease', 'throw', 'threat', 'demanded', 'lots', 'crossed', 'wire', 'muscle', 'o&#8217;clock', 'anybody', 'golden', 'Hardy', 'Anne', 'wages', 'hate', 'increasingly', 'bag', 'bound', 'express', 'regional', 'pride', 'engineer', 'sufficiently', 'distinguished', 'reflected', 'reactions', 'varying', 'varied', 'weapon', 'Journal', 'touched', 'guns', 'exists', 'editorial', 'seeds', 'possibilities', 'civilization', 'distinct', 'particles', 'Skill', 'fed', 'Rachel', 'anxiety', 'Linda', 'opposed', 'customers', 'proposal', 'storage', 'representatives', 'teach', 'societies', 'constantly', 'neighbors', 'removal', 'communities', 'vice', 'sell', 'Democrats', 'visited', 'writes', 'rough', 'steady', 'spending', 'Illinois', 'distinction', 'Francisco', 'Carl', 'arc', 'comparable', 'rare', 'continues', 'favorite', 'sake', 'display', 'Queen', 'downtown', 'restaurant', 'pleased', 'institution', 'assumption', 'seed', 'bread', 'match', 'musicians', 'remaining', 'Pike', 'shift', 'participation', 'virtually', 'stepped', 'limits', 'funny', 'smoke', 'involves', 'rarely', 'atoms', 'whereas', 'describe', 'cooling', 'tissue', 'Henrietta', 'Kate', 'combined', 'exception', 'Regarding', 'Highway', 'approved', 'personally', 'composed', 'senator', 'legislative', 'dependent', 'afford', 'Atlantic', 'Dean', 'happens', 'Walter', 'languages', 'goals', 'decide', 'notion', 'laboratory', 'proof', 'existed', 'Bob', 'Self', 'Grace', 'missed', 'prominent', 'code', 'thoroughly', 'shared', 'talent', 'studying', 'Handsome', 'automatic', 'burned', 'permanent', 'observations', 'drawing', 'Winston', 'desegregation', 'guidance', 'today&#8217;s', 'improvement', 'Treasury', 'presumably', 'bars', 'brings', 'Papa', 'indicates', 'discover', 'painted', 'intense', 'tool', 'necessity', 'eleven', 'shouted', 'focus', 'finger', 'conscience', 'criticism', 'psychological', 'thrown', 'glance', 'regions', 'stranger', 'joy', 'Pope', 'visual', 'parallel', 'shear', 'rode', 'Legislature', 'candidates', 'authorities', 'estimate', 'Lawrence', 'acts', 'improve', 'Ill', 'Rayburn', 'Cooperation', 'Communists', 'neutral', 'determination', 'deeply', 'assured', 'attractive', 'transfer', 'represents', 'newspapers', 'colleges', 'joint', 'Mississippi', 'severe', 'introduction', 'emergency', 'striking', 'trials', 'gained', 'contributed', 'mad', 'magazine', 'forever', 'mystery', 'selection', 'anywhere', 'furniture', 'agents', 'derived', 'revealed', 'provisions', 'guest', 'allotment', 'satisfactory', 'controlled', 'finish', 'maturity', 'concert', 'comedy', 'stick', 'Sleeping', 'listening', 'soldier', 'holes', 'Holmes', 'long-range', 'recall', 'mankind', 'destroyed', 'hydrogen', 'furthermore', 'objectives', 'defined', 'handling', 'Mayor', 'specifically', 'scheduled', 'accounts', 'districts', 'serving', 'leaned', 'experimental', 'tonight', 'track', 'Simultaneously', 'handed', 'copy', 'glad', 'Thompson', 'Paul', 'sharply', 'experts', 'reception', 'Temple', 'fifth', 'Robinson', 'Ohio', 'Cotton', 'attempts', 'sudden', 'bringing', 'sister', 'Foundation', 'ears', 'Japan', 'Palace', 'arrangements']
 bot = commands.Bot(command_prefix='€')
 guild = Guild_utils(bot, GUILD_ID)
 db.init()
@@ -130,5 +131,64 @@ anime_list = ["Re:Zero − Starting Life in Another World.", "Death Note.", "Nar
 @bot.command(help="suggest an anime for You")
 async def anime(message):
     await message.channel.send(random.choice(anime_list))
-   
+@bot.command()
+async def hangman(ctx):
+    global playing
+    if playing == False:
+        playing = True
+        wrongcount = 6
+        wrongletter = []
+        word = (wordlist[random.randint(0, 848)])
+        word = word.lower()
+        length = len(word)
+        letters = []
+        letter = []
+        for i in range(length):
+            letters.append(word[i])
+            letter.append("-")
+        await ctx.send(str(length) + " letter word")
+        await ctx.send(' '.join(letter))
+        def checksender(msg):
+            return msg.channel == ctx.channel and msg.author.name == ctx.message.author.name
+        while playing:
+            msg = await bot.wait_for('message', check=checksender)
+            if (msg.content) == word:
+                await ctx.send("correct! you won a big nothing congrats!!")
+                playing = False
+            elif len(msg.content) == 1:
+                if (msg.content) in word:
+                    for i in range(length):
+                        if letters[i] == msg.content:
+                            letter[i] = msg.content
+                            await ctx.send(' '.join(letter))
+                            if not "-" in letter:
+                                await ctx.send("correct! you won a big nothing congrats!!")
+                else:
+                    if msg in wrongletter:
+                        await ctx.send("you tried that before and it is wrong")
+                    else:
+                        wrongcount -= 1
+                        wrongletter.append(msg)
+                        await ctx.send("wrong you have " + str(wrongcount) + " tries left")
+                        if wrongcount == 0:
+                            await ctx.send("you lost ! the word was " + word)
+                            playing = False
+            elif msg.content == "hint":
+                hint = False
+                if wrongcount > 0:
+                    while not hint:
+                        randm = random.randint(0, length-1)
+                        if letter[randm] == "-":
+                            letter[randm] = word[randm]
+                            wrongcount -= 1
+                            await ctx.send(' '.join(letter) + " you have " + str(wrongcount) + " tries left")
+                            hint = True
+                else:
+                    await ctx.send("sorry you only have 1 life left you have to guess")
+            else:
+                wrongcount -= 1
+                await ctx.send("nope sowwy you have " + str(wrongcount) + " tries left :(")
+                if wrongcount == 0:
+                    await ctx.send("you lost ! the word was " + word)
+                    playing = False 
 bot.run(os.environ["TOKEN"])
