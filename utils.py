@@ -37,3 +37,12 @@ class Guild_utils(object):
             channels[quick_name] = channel
 
         return channels
+    
+    @property
+    def EMOJIS(self):
+        emojis = {}
+
+        for emoji_id, emoji in list(map(lambda e: (e.id, e), self.guild.emojis)):
+            emojis[emoji_id] = emoji
+        
+        return emojis
