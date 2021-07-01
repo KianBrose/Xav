@@ -83,7 +83,7 @@ async def w(ctx):
 
 @bot.command()
 async def money(ctx):
-    await ctx.send(" <:pepeEvil:859652252040691712> https://www.youtube.com/watch?v=KigVdcSr8s4")
+    await ctx.send(f"{guild.EMOJIS[858462619752857620]} https://www.youtube.com/watch?v=KigVdcSr8s4")
 
 @bot.command()
 async def karma(ctx):
@@ -131,4 +131,4 @@ anime_list = ["Re:Zero − Starting Life in Another World.", "Death Note.", "Nar
 async def anime(message):
     await message.channel.send(random.choice(anime_list))
    
-bot.run(os.environ["TOKEN"])
+bot.run("")
