@@ -22,7 +22,7 @@ def register_member(member):
 
 @bot.event
 async def on_ready():
-    print(f"Logged as {bot.user}")
+    print(f"Logged as XAV")
 
 
 @bot.event
