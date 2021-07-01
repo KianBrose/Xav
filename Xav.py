@@ -41,7 +41,7 @@ async def on_message(message):
             for member in message.mentions:
                 if member.id in done:
                     continue
-                    
+
                 if db.get_member(member.id) is None:
                     register_member(member)
                 
