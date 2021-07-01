@@ -7,7 +7,7 @@ import db
 from utils import Guild_utils
 
 
-GUILD_ID = 711325947269349448
+GUILD_ID = 700300301030391828
 
 bot = commands.Bot(command_prefix='€')
 guild = Guild_utils(bot, GUILD_ID)
