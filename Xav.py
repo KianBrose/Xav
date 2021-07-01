@@ -37,7 +37,11 @@ async def on_message(message):
     # karma gestion
     if message.content.lower().split(" ")[0] in {"thx", "thanks", "ty"}:
         if message.mentions:
+            done = []
             for member in message.mentions:
+                if member.id in done:
+                    continue
+                    
                 if db.get_member(member.id) is None:
                     register_member(member)
                 
@@ -49,7 +53,9 @@ async def on_message(message):
                     return
                 
                 db.update_member_karma(member.id, 1)
-                await message.add_reaction("👍")
+                done.append(member.id)
+
+            await message.add_reaction("👍")
 
     await bot.process_commands(message)
 
@@ -77,7 +83,7 @@ async def w(ctx):
 
 @bot.command()
 async def money(ctx):
-    await ctx.send("https://www.youtube.com/watch?v=KigVdcSr8s4")
+    await ctx.send(" <:pepeEvil:859652252040691712> https://www.youtube.com/watch?v=KigVdcSr8s4")
 
 @bot.command()
 async def karma(ctx):

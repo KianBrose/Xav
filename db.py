@@ -71,13 +71,13 @@ def update_member_karma(member_id: int, add_value: int) -> bool:
     :return: if it succeed or not
     """
 
-    if (member_data := get_member(member_id)) is None:
+    if get_member(member_id) is None:
         return False
     
     if add_value == 0:
         return True
 
-    current_level = int(member_data["karma"])
+    current_level = int(get_member(member_id)["karma"])
     next_level = current_level + add_value
 
     _request("UPDATE Users SET 'karma' = ? WHERE id = ?", (next_level, member_id))
@@ -92,13 +92,13 @@ def update_member_roles(member_id: int, new_role_id: int) -> bool:
     :param new_role_id: the id of the role to add
     :return: if it succeed or not
     """
-    if (member_data := get_member(member_id)) is None:
+    if get_member(member_id) is None:
         return False
     
     if new_role_id is None:
         return True
 
-    roles = member_data["roles"]
+    roles = get_member(member_id)["roles"]
     _request("UPDATE Users SET 'roles' = ? WHERE id = ?", (f"{roles}-{new_role_id}", member_id))
     return True
 
@@ -110,7 +110,7 @@ def update_member_name(member_id: int, new_name: str) -> bool:
     :param new_name: the name
     :return: if it succeed or not
     """
-    if (member_data := get_member(member_id)) is None:
+    if get_member(member_id) is None:
         return False
     
     if new_name is None:
