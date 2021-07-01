@@ -7,7 +7,6 @@ from utils import Guild_utils
 
 GUILD_ID = 711325947269349448
 
-bot = commands.Bot(command_prefix='.')
 guild = Guild_utils(bot, GUILD_ID)
 scorebot = ThankYou.ScoreBot("Scores.db", "ScoresTable")
 msgbot = ThankYou.MessageKeeperBot("Messages.db", "MessagesTable")
