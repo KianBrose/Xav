@@ -7,7 +7,7 @@ import db
 from utils import Guild_utils
 
 
-GUILD_ID = 700300301030391828
+GUILD_ID = 711325947269349448
 
 bot = commands.Bot(command_prefix='€')
 guild = Guild_utils(bot, GUILD_ID)
@@ -22,7 +22,7 @@ def register_member(member):
 
 @bot.event
 async def on_ready():
-    print(f"Logged as {bot.user}")
+    print(f"Logged as XAV")
 
 
 @bot.event
@@ -41,7 +41,7 @@ async def on_message(message):
             for member in message.mentions:
                 if member.id in done:
                     continue
-                    
+
                 if db.get_member(member.id) is None:
                     register_member(member)
                 
@@ -83,7 +83,7 @@ async def w(ctx):
 
 @bot.command()
 async def money(ctx):
-    await ctx.send(" <:pepeEvil:859652252040691712> https://www.youtube.com/watch?v=KigVdcSr8s4")
+    await ctx.send(f"{guild.EMOJIS[858462619752857620]} https://www.youtube.com/watch?v=KigVdcSr8s4")
 
 @bot.command()
 async def karma(ctx):
@@ -131,4 +131,4 @@ anime_list = ["Re:Zero − Starting Life in Another World.", "Death Note.", "Nar
 async def anime(message):
     await message.channel.send(random.choice(anime_list))
    
-bot.run(os.environ["TOKEN"])
+bot.run("")
