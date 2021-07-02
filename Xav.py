@@ -1,24 +1,17 @@
 import discord
 from discord.ext import commands
 import random
-import os
+import ThankYou
 
-import db
 from utils import Guild_utils
-
 
 GUILD_ID = 711325947269349448
 
 bot = commands.Bot(command_prefix='€')
+
 guild = Guild_utils(bot, GUILD_ID)
-db.init()
-
-def register_member(member):
-    id = member.id
-    name = member.name
-    roles = list(map(lambda r: r.id, member.roles))
-    db.add_member(id, name, roles)
-
+scorebot = ThankYou.ScoreBot("Scores.db", "ScoresTable")
+msgbot = ThankYou.MessageKeeperBot("Messages.db", "MessagesTable")
 
 @bot.event
 async def on_ready():
@@ -78,20 +71,69 @@ async def tos(ctx):
 
 @bot.command()
 async def w(ctx):
-    await ctx.send(random.choices(['Welcome', 'Welcum'], [0.99, 0.01])[0])  # 1% chance of saying "Welcum"
-
+    await ctx.send(random.choices(['Welcome', 'Welcum'], [0.99, 0.01]))
 
 @bot.command()
+
+@commands.has_permissions(administrator=True)
+async def addScore(ctx, name, score):
+    try:    
+        scorebot.updateScore(name, int(score))
+
+        await ctx.send("Done!")
+    
+    except Exception as e:
+        await ctx.send(f"Something went wrong - `{e}`")
+
 async def money(ctx):
     await ctx.send(f"{guild.EMOJIS[858462619752857620]} https://www.youtube.com/watch?v=KigVdcSr8s4")
 
-@bot.command()
-async def karma(ctx):
-    await ctx.send(f"You have : {db.get_member(ctx.author.id)['karma']} karmas")
 
 @bot.command()
-async def h(ctx):
-    await ctx.send(random.choices(['hello', 'hello world'], [0.60, 0.40]))
+@commands.has_permissions(administrator=True)
+async def subScore(ctx, name, score):
+    try:
+        score = int("-" + str(score))
+        scorebot.updateScore(name, score)
+
+        await ctx.send("Done!")
+    
+    except Exception as e:
+        await ctx.send(f"Something went wrong - `{e}`")
+
+@bot.command()
+async def getPlayer(ctx, name: discord.User):
+    newname = str(name.id)
+    name = name.name
+    try:
+        user = scorebot.getData(newname, mode="individual")
+
+        embed = discord.Embed(title="{}'s Score".format(name), description="What's {}'s score?".format(name), color = 0xFF5733)
+        embed.add_field(name="Score", value="{} has {} points. Good Job! I guess...".format(name, user[0][1]))
+        
+        await ctx.send(embed=embed)
+
+    except IndexError:
+        await ctx.send("Are you sure that user exists?")
+        
+@bot.command()
+async def thankyou(ctx):
+    if ctx.message.reference:
+        msg = await ctx.fetch_message(id=ctx.message.reference.message_id)
+        try:
+            if str(ctx.message.author.id) in msgbot.getMessage(str(msg.id), str(msg.channel.id))[0][2]:
+                await ctx.send("You already gave your thanks.")
+
+        except IndexError:
+            msgbot.addUser(str(msg.id), str(msg.channel.id), str(ctx.message.author.id))
+            scorebot.updateScore(str(msg.author.id), 5)
+            scorebot.updateScore(str(ctx.message.author.id), 1)
+
+            await ctx.send("You've sent your thanks. (psst, you got a point as well)")
+        
+    else:
+        await ctx.send("You have to use this as a reply to a message.")
+
 @bot.command()
 async def s(contex):
     enemy = random.choice (["chihuahua", "border collie", "wolf"])
