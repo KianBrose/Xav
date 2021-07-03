@@ -3,8 +3,7 @@ from discord.ext import commands
 import random
 import ThankYou
 
-
-bot = commands.Bot(command_prefix='€')
+bot = commands.Bot(command_prefix='>')
 
 scorebot = ThankYou.ScoreBot("Scores.db", "ScoresTable")
 msgbot = ThankYou.MessageKeeperBot("Messages.db", "MessagesTable")
@@ -14,6 +13,11 @@ msgbot = ThankYou.MessageKeeperBot("Messages.db", "MessagesTable")
 async def on_ready():
     print(f"Logged as XAV")
 
+@bot.event
+async def on_message(msg):
+    # Auto TOS Sender
+    if (("made" or "make" or "created") and ("game" or "online") and ("bot" or "script" or "program" or "app")) in msg.content.lower():
+        await msg.channel.send("Remember, discussion of cheating or automation of games is not allowed")
 
 @bot.command()
 async def info(ctx):
@@ -22,7 +26,6 @@ async def info(ctx):
                  """
     await ctx.send(texttosend)
 
-
 @bot.command()
 async def tos(ctx):
     texttosend = """
@@ -30,36 +33,30 @@ async def tos(ctx):
                  """
     await ctx.send(texttosend)
 
-
-@bot.command()
-async def w(ctx):
-    await ctx.send(random.choices(['Welcome', 'Welcum'], [0.99, 0.01]))
-
-
 @bot.command()
 @commands.has_permissions(administrator=True)
-async def addScore(ctx, name, score):
+async def addScore(ctx, name: discord.User, score):
+    newname = str(name.id)
     try:    
-        scorebot.updateScore(name, int(score))
+        scorebot.updateScore(newname, int(score))
 
         await ctx.send("Done!")
     
     except Exception as e:
         await ctx.send(f"Something went wrong - `{e}`")
 
-
 @bot.command()
 @commands.has_permissions(administrator=True)
-async def subScore(ctx, name, score):
+async def subScore(ctx, name: discord.User, score):
+    newname = str(name.id)
     try:
         score = int("-" + str(score))
-        scorebot.updateScore(name, score)
+        scorebot.updateScore(newname, score)
 
         await ctx.send("Done!")
     
     except Exception as e:
         await ctx.send(f"Something went wrong - `{e}`")
-
 
 @bot.command()
 async def getPlayer(ctx, name: discord.User):
@@ -75,12 +72,15 @@ async def getPlayer(ctx, name: discord.User):
 
     except IndexError:
         await ctx.send("Are you sure that user exists?")
-        
 
 @bot.command()
 async def thankyou(ctx):
     if ctx.message.reference:
         msg = await ctx.fetch_message(id=ctx.message.reference.message_id)
+        if ctx.message.author.id == msg.author.id:
+            await ctx.send("You can't thank yourself.")
+            return -1
+
         try:
             if str(ctx.message.author.id) in msgbot.getMessage(str(msg.id), str(msg.channel.id))[0][2]:
                 await ctx.send("You already gave your thanks.")
@@ -96,4 +96,4 @@ async def thankyou(ctx):
         await ctx.send("You have to use this as a reply to a message.")
 
 
-bot.run("")
+bot.run("ODYwMTI0NTQ4MjcxNTcwOTY0.YN2raA.0AF7wUsYF6RCEWoBaZnlRK_8XI8")
