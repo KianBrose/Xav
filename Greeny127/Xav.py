@@ -1,13 +1,13 @@
 import discord
 from discord.ext import commands
 import random
+import re
 import ThankYou
 
-bot = commands.Bot(command_prefix='>')
+bot = commands.Bot(command_prefix='>', help_command=None)
 
 scorebot = ThankYou.ScoreBot("Scores.db", "ScoresTable")
 msgbot = ThankYou.MessageKeeperBot("Messages.db", "MessagesTable")
-
 
 @bot.event
 async def on_ready():
@@ -15,9 +15,32 @@ async def on_ready():
 
 @bot.event
 async def on_message(msg):
+    def find(w):
+        return re.compile(r'\b({0})\b'.format(w), flags=re.IGNORECASE).search
+
     # Auto TOS Sender
-    if (("made" or "make" or "created") and ("game" or "online") and ("bot" or "script" or "program" or "app")) in msg.content.lower():
-        await msg.channel.send("Remember, discussion of cheating or automation of games is not allowed")
+    if (find("made")(msg.content.lower()) or find("make")(msg.content.lower()) or find("create")(msg.content.lower()) != None):
+        if (find("game")(msg.content.lower()) or find("online")(msg.content.lower()) != None):
+            if (find("bot")(msg.content.lower()) or find("script")(msg.content.lower()) or find("program")(msg.content.lower()) != None):        
+                if msg.author == bot.user:
+                    pass
+
+                else:
+                    await msg.channel.send("Remember, discussion of cheating or automation of games is not allowed")
+
+    await bot.process_commands(msg)
+
+@bot.command()
+async def help(ctx, com=""):
+    def randHex(rgb):
+        return int('%02x%02x%02x' % rgb, 16)
+
+    if com == "":
+        hexcode = randHex((random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)))
+        embed = discord.Embed(title="Help", description="Here's all the commands!", color = hexcode)
+        embed.add_field(name="ThankYou system", value="thankyou\ngetPlayer\naddScore\nsubScore")
+
+        await ctx.send(embed=embed)
 
 @bot.command()
 async def info(ctx):
@@ -96,4 +119,4 @@ async def thankyou(ctx):
         await ctx.send("You have to use this as a reply to a message.")
 
 
-bot.run("ODYwMTI0NTQ4MjcxNTcwOTY0.YN2raA.0AF7wUsYF6RCEWoBaZnlRK_8XI8")
+bot.run("")
