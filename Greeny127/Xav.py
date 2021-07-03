@@ -96,4 +96,4 @@ async def thankyou(ctx):
         await ctx.send("You have to use this as a reply to a message.")
 
 
-bot.run("ODYwMTI0NTQ4MjcxNTcwOTY0.YN2raA.0AF7wUsYF6RCEWoBaZnlRK_8XI8")
+bot.run("")
