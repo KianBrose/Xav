@@ -22,7 +22,7 @@ async def on_message(message):
 		val1, val2, val3 = random.randint(0,9), random.randint(0,9), random.randint(0,9)
 		lst1=["u prolly do oc redstone builds dont you",
 "damn bro does your brain contribute for 99% of your body weight? prolly not since you use discord you fat piece of shit, go out and see the sun for a while",
-"u prolly fap to neil degrasse tyson dont you?",
+"u probably fap to neil degrasse tyson dont you?",
 "woah big brain",
 "do u eat books for lunch",
 "zombie's delicacy",
