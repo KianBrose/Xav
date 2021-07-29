@@ -6,7 +6,6 @@ class Guild_utils(object):
     >>> guild = Guild_utils(bot, guild_id)
     >>> guild.ROLES["ACTIVE"]  # get the active role object
     >>> guild.CHANNELS["suggestions"]  # get the suggestion channel (don't have to type the emoji)
-    >>> guild.EMOJIS[id]  # get the emoji 
     >>> guild.guild  # the actual guild object, you can access all methods of discord.Guild through here
     """
     def __init__(self, bot, guild_id):
@@ -21,8 +20,8 @@ class Guild_utils(object):
     def ROLES(self):
         roles = {}
 
-        for role_name, role in list(map(lambda r: (r.name, r), self.guild.roles)):
-            roles[role_name] = role
+        for role_id, role in list(map(lambda r: (r.id, r), self.guild.roles)):
+            roles[role_id] = role
         
         return roles
 
@@ -43,7 +42,7 @@ class Guild_utils(object):
     def EMOJIS(self):
         emojis = {}
 
-        for emoji_id, emoji in list(map(lambda e: (e.id, e), self.guild.emojis)):
-            emojis[emoji_id] = emoji
+        for emoji_name, emoji in list(map(lambda e: (e.name, e), self.guild.emojis)):
+            emojis[emoji_name] = emoji
         
         return emojis

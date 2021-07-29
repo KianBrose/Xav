@@ -1,5 +1,4 @@
 import sqlite3
-import os
 
 
 _keys = ('id', 'name', 'roles', 'karma')
@@ -24,6 +23,7 @@ def init():
         pass # Just checking if the database exists
 
     _request("CREATE TABLE Users (id, name, roles, karma)")
+    _request("CREATE TABLE RoleReact (msgid, emojis, roles, creator)")
 
 
 def add_member(member_id: int, member_name: str, member_roles_id: list) -> bool:
@@ -119,3 +119,50 @@ def update_member_name(member_id: int, new_name: str) -> bool:
     _request("UPDATE Users SET 'name' = ? WHERE id = ?", (new_name, member_id))
     return True
 
+
+def add_rolereact(msgid: int, emojis: list, roles: list, creator_id: int) -> bool:
+    """
+    Add a message to check for reactions
+    :param msgid: the id of the original message
+    :param emojis: the emojis you can react to
+    :param roles: the roles names you can get
+    :param creator_id: the id of the member that created this
+    """
+    if len(emojis) != len(roles):
+        raise ValueError("emojis and roles should be the same size")
+
+    emojis = "-".join(emojis)
+    roles = "-".join(list(map(lambda r: str(r), roles)))
+    
+    try:
+        _request("INSERT INTO RoleReact VALUES (?, ?, ?, ?)", (str(msgid), emojis, roles, str(creator_id)))
+        return True
+    except sqlite3.Error as err:
+        print(err)
+        return False
+
+
+def del_rolereact(msgid: int) -> bool:
+    """
+    Delete the monitoring of a message
+    :param msgid: the id of the original message
+    """
+    try:
+        _request("DELETE FROM RoleReact WHERE msgid = ?", (msgid,))
+        return True
+    except sqlite3.Error as err:
+        print(err)
+        return False
+
+
+def get_rolereact_info(msgid: int) -> dict:
+    try:
+        raw_data = _request("SELECT * FROM RoleReact WHERE msgid = ?", (str(msgid), ))[0][1:]  # we don't need msgid
+    except IndexError:
+        return None
+    
+    return {
+        'emojis': raw_data[0].split("-"),
+        'roles': list(map(lambda r: int(r), raw_data[1].split("-"))),
+        'creator': int(raw_data[2])
+    }
