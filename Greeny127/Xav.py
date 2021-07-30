@@ -1,13 +1,19 @@
 import discord
 from discord.ext import commands
+from utils import Guild_utils
 import random
+import requests
 import re
 import ThankYou
+import randcommands
 
 bot = commands.Bot(command_prefix='>', help_command=None)
+guild_id = 711325947269349448
+guild = Guild_utils(bot, guild_id)
 
 scorebot = ThankYou.ScoreBot("Scores.db", "ScoresTable")
 msgbot = ThankYou.MessageKeeperBot("Messages.db", "MessagesTable")
+randcmdbot = randcommands.Commands()
 
 @bot.event
 async def on_ready():
@@ -26,7 +32,7 @@ async def on_message(msg):
                     pass
 
                 else:
-                    await msg.channel.send("Remember, discussion of cheating or automation of games is not allowed")
+                    await msg.channel.send("Remember, discussion of cheating or automation of games is not allowed (Discord TOSs)")
 
     await bot.process_commands(msg)
 
@@ -55,6 +61,22 @@ async def tos(ctx):
     - As much as I don't like discord TOS, discussion of cheating or automation of games is not allowed
                  """
     await ctx.send(texttosend)
+
+# CAPTIALISM GAMMA!!!!!!!!!
+@bot.command()
+async def money(ctx):
+    await ctx.send(f"{guild.EMOJIS[858462619752857620]} https://www.youtube.com/watch?v=KigVdcSr8s4")
+
+@bot.command()
+async def ratemypic(ctx):
+    await ctx.send("It might take while! I mean, I AM deciding whether to give your pic a good score or not. It's hard work I tell you!")
+    score = randcmdbot.ratemypic(requests.get(ctx.message.attachments[0].url, stream=True).raw)
+
+    em = discord.Embed(title="Rating your pic...", description='How good is YOUR pic? Find out!', color=0x00ff00)
+    em.add_field(name="Score", value="Your pic gets a whopping {}%!".format(score))
+    em.set_thumbnail(url=ctx.message.attachments[0].url)
+
+    await ctx.send(embed=em)
 
 @bot.command()
 @commands.has_permissions(administrator=True)
