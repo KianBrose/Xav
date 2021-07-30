@@ -72,6 +72,8 @@ async def help(ctx):
     embed.add_field(name=f"{PREFIX}karma", value="check your current karma")
     embed.add_field(name=f"{PREFIX}pool <question>", value="create a pool")
     embed.add_field(name=f"{PREFIX}rolereact <message link> <emojis> <roles>", value="create a role react event (admin only)")
+    embed.add_field(name=f"{PREFIX}giveway <time (d|h|m|s> <prize> <optionnal text>", value="create giveway (admin only)")
+    embed.add_field(name=f"{PREFIX}reroll <msglink>", value="reroll the result of a giveway (admin only)")
 
     await ctx.send(embed=embed)
 
