@@ -5,30 +5,30 @@ import random
 
 
 def convert(time_str):
-	converted = -1
-	time_symbols = {'d': 3600*24,
-			'h': 3600,
-			'm': 60,
-			's': 1}
+    converted = -1
+    time_symbols = {'d': 3600*24,
+                    'h': 3600,
+                    'm': 60,
+                    's': 1}
 
-	for symbol in time_symbols.keys():
-		data = time_str.split(symbol)
+    for symbol in time_symbols.keys():
+        data = time_str.split(symbol)
 
-		if len(data) > 2:
-			return -1
+        if len(data) > 2:
+            return -1
 
-		if len(data) == 2:
-			time_str = data[1]
+        if len(data) == 2:
+            time_str = data[1]
+	
+        if len(data) == 1:
+            continue
 
-		if len(data) == 1:
-			continue
+        try:
+            converted += int(data[0]) * time_symbols[symbol]
+        except ValueError:
+            return -1
 
-		try:
-			converted += int(data[0]) * time_symbols[symbol]
-		except ValueError:
-			return -1
-
-	return converted
+    return converted
 
 
 class Giveway(commands.Cog):
@@ -37,6 +37,7 @@ class Giveway(commands.Cog):
         self.guild = guild
 
     @commands.command()
+    @commands.has_guild_permissions(administrator=True)
     async def giveway(self, ctx, time_left, prize, *text):
         await ctx.message.delete()
 
@@ -72,6 +73,7 @@ class Giveway(commands.Cog):
 
 
     @commands.command()
+    @commands.has_guild_permissions(administrator=True)
     async def reroll(self, ctx, msg_link):
         try:
             link = msg_link.split('/')
