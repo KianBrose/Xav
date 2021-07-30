@@ -1,4 +1,5 @@
 import sqlite3
+import os
 
 
 _keys = ('id', 'name', 'roles', 'karma')
@@ -19,8 +20,11 @@ def _request(command: str, parameters=()) -> str:
 
 
 def init():
-    with open("database.sqlite", "w") as db:
-        pass # Just checking if the database exists
+    if os.path.isfile("database.sqlite"):
+        return
+
+    with open("database.sqlite", "w") as _:
+        pass 
 
     _request("CREATE TABLE Users (id, name, roles, karma)")
     _request("CREATE TABLE RoleReact (msgid, emojis, roles, creator)")
