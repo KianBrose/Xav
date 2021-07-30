@@ -7,9 +7,9 @@ import random
 def convert(time_str):
 	converted = -1
 	time_symbols = {'d': 3600*24,
-					'h': 3600,
-					'm': 60,
-					's': 1}
+			'h': 3600,
+			'm': 60,
+			's': 1}
 
 	for symbol in time_symbols.keys():
 		data = time_str.split(symbol)
