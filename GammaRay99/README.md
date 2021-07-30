@@ -1,10 +1,23 @@
-My contribution
+# My contribution
 
-1) Added tools to help the developpement 
-2) Added a thanks system: "thx @user1 @user2" will add karma to both users, "€karma" to check your karma
-3) Improved €w 😏
-4) Added €money ;)
-5) Added €help
-6) Added €pool
-7) Added €rolereact
-      - €rolereact <msg link> emoji1-emoji2 @role1-@role2   (admin only)
+ - Added a thanks system
+     - > "thx @user1 @user2" will add karma to both users
+     - > "€karma" to check your karma
+     
+ - Added a pool system
+     - > "€pool question" to create a pool
+    
+ - Added a rolereact gestion
+     - > "€rolereact <msg link> emoji1-emoji2 @role1-@role2" to create a listener
+     - Admin only
+      
+ - Added a giveway system
+     - > "€giveway 2h30m 1000€ you guys deserve it" to create a giveway event
+     - > "€reroll <msglink>" to reroll
+     -  Admin only
+      
+ - Added €help
+      
+ - Added €money for capitalism power
+      
+ - Improved €w
