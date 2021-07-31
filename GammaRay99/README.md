@@ -9,11 +9,14 @@
     
  - Added a rolereact gestion
      - > "€rolereact <msg link> emoji1-emoji2 @role1-@role2" to create a listener
+     - Reacting once will give you the role, reacting again will remove it 
      - Admin only
       
  - Added a giveway system
      - > "€giveway 2h30m 1000€ you guys deserve it" to create a giveway event
      - > "€reroll <msglink>" to reroll
+     -  You can specify really precise time like 6d10h30h05s
+     -  Reaction to the embed required to participate
      -  Admin only
       
  - Added €help
