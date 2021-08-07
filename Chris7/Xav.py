@@ -4,7 +4,7 @@ from ghost_ping_detector import GhostPingDetector
 
 bot = commands.Bot(command_prefix='€', case_insensitive=True)
 
-bot.add_cog(GhostPingDetector(bot))
+bot.add_cog(GhostPingDetector())
 
 
 @bot.event

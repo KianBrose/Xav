@@ -3,9 +3,6 @@ from discord.ext import commands
 
 
 class GhostPingDetector(commands.Cog):
-    def __init__(self, bot):
-        self.bot = bot
-
     @commands.Cog.listener()
     async def on_message_delete(self, message):
         if message.author.bot:
@@ -23,9 +20,6 @@ class GhostPingDetector(commands.Cog):
                 if isinstance(replied_to_channel, TextChannel):
                     replied_to_message = await replied_to_channel.fetch_message(message.reference.message_id)
                     replied_to_user = replied_to_message.author
-
-            if replied_to_user and replied_to_user.bot:
-                return
 
             embed = Embed(colour=0x35BC31, title='Ghost Ping Detected!')
 
